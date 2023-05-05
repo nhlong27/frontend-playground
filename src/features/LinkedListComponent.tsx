@@ -1,22 +1,23 @@
 import React from 'react';
 import { LinkedList, LinkedListNode } from '@/utils/linked-list';
 
-const list = new LinkedList<string>();
-list.append('A');
-list.append('B');
+// const list = new LinkedList<string>();
+// list.append('A');
+// list.append('B');
 
 const LinkedListComponent = () => {
-  const [onClick, setOnClick] = React.useState(false);
-  const [shouldMiddleExpand, setShouldMiddleExpand] = React.useState(false);
+  const [list, setList] = React.useState(new Array('A', 'B'));
+
+  // const [shouldMiddleExpand, setShouldMiddleExpand] = React.useState(false);
   return (
     <div className='w-full min-h-dynamic-screen bg-slate-900 text-stone-100 flex gap-2 justify-center items-center'>
-      {list.toArray().map((nodeValue, index: number) => (
+      {list.map((nodeValue, index: number) => (
         <React.Fragment key={index}>
           <div
             key={index}
             onClick={() => {
-              list.delete(nodeValue);
-              setOnClick((prev) => !prev);
+              list.splice(index, 1);
+              setList(new Array(...list));
             }}
             className='grid place-items-center ring-2 ring-slate-100 w-[10rem] hover:text-2xl transition-all duration-100  rounded-xl aspect-square'
           >
@@ -24,8 +25,8 @@ const LinkedListComponent = () => {
           </div>
           <button
             onClick={() => {
-              list.insert(index + 1, 'X');
-              setOnClick((prev) => !prev);
+              list.splice(index + 1, 0, 'X');
+              setList(new Array(...list));
             }}
             className='hover:min-w-[2rem] w-auto transition-all duration-100 h-[10rem] min-w-[1rem] rounded-xl hover:bg-slate-800'
           ></button>
