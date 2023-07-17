@@ -1,15 +1,22 @@
 import React from 'react';
-import LinkedListComponent from './features/LinkedListComponent';
-import SetComponent from './features/SetComponent';
-import StackComponent from './features/StackComponent';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import MoviePage from './pages/MoviePage';
+import ContactPage from './pages/ContactPage';
+import { Mid } from './features/mid';
+
 
 const App = () => {
   return (
-    <React.Fragment>
-      {/* <SetComponent /> */}
-      {/* <LinkedListComponent /> */}
-      <StackComponent />
-    </React.Fragment>
+    <BrowserRouter basename='/'>
+      <React.Fragment>
+        <Routes>
+          <Route path='/' /> 
+          <Route path='/movie' element={<MoviePage />} /> 
+          <Route path='/contact' element={<ContactPage />} /> 
+          <Route path='/mid' element={<Mid />} /> 
+        </Routes>
+      </React.Fragment>
+    </BrowserRouter>
   );
 };
 

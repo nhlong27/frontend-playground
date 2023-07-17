@@ -20,3 +20,11 @@
 # Other dev dependencies
 "@types/react-lazy-load-image-component": "^1.5.2",
     "@tanstack/react-query-devtools": "^4.24.4",
+
+# Playgrounds
+- movie
+    - where to use catch in fetching 
+- contact book
+    - react checks key to decide if states need updating 
+- data structures
+- text, button boilerplates 
