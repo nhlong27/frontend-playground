@@ -1,27 +1,29 @@
 import React from 'react';
-import { getMovie } from '../queries';
+import { MoviesType, getMovies } from '../queries';
 
-const useGetMovie = (query: string) => {
-  const [movie, setMovie] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
-  React.useEffect(() => {
-    setLoading(true);
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-    getMovie(query, signal)
-      .then((response: any) => setMovie(response))
-      .catch((error) => {
-        console.log('checking:' + error);
-        setError(error);
+export const useGetMovies = (query: string) => {
+  const [isLoading, setIsLoading] = React.useState(true)
+  const [error, setError] = React.useState(null)
+  const [data, setData] = React.useState<null | MoviesType>(null)
+  React.useEffect(()=>{
+    const controller = new AbortController();
+    const signal = controller.signal;
+    try {
+      getMovies(query, signal).then((response: MoviesType) => {
+        console.log(response)
+        setData(response)
       })
-      .finally(() => setLoading(false));
+    }
+    catch (err: any) {
+      setError(err)
+    }
+    finally {
+      setIsLoading(false)
+    }
+
     return () => {
-      abortController.abort();
-    };
-  }, [query]);
-
-  return { data: movie, loading, error };
-};
-
-export default useGetMovie;
+      controller.abort();
+    }
+  },[query])
+  return {data, error, isLoading}
+}

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MoviePage from './pages/MoviePage';
 import ContactPage from './pages/ContactPage';
 import { Mid } from './features/mid';
+import { ShoppingPage } from './features/shopping_cart';
 
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
           <Route path='/movie' element={<MoviePage />} /> 
           <Route path='/contact' element={<ContactPage />} /> 
           <Route path='/mid' element={<Mid />} /> 
+          <Route path='/cart' element={<ShoppingPage />} /> 
         </Routes>
       </React.Fragment>
     </BrowserRouter>

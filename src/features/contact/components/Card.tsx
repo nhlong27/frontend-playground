@@ -1,51 +1,38 @@
 import React from 'react';
+import Form from './Form';
 
 const Card = ({
-  item,
-  handleDelete,
+  contact,
   handleEdit,
+  handleDelete,
+  children,
 }: {
-  item: Record<string, string>;
-  handleDelete: Function;
+  contact: { name: string; city: string, key: string };
   handleEdit: Function;
+  handleDelete: Function;
+  children: React.ReactNode;
 }) => {
   const [isEditable, setIsEditable] = React.useState(false);
-  const [name, setName] = React.useState(item.name);
-  const [city, setCity] = React.useState(item.city);
   return (
-    <li>
-      <h1>{item.name}</h1>
-      <p>City: {item.city}</p>
+    <div>
       {isEditable ? (
         <>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleEdit(item, { name, city });
+          <Form
+            handleSubmit={({ name, city }: { name: string; city: string }) => {
+              handleEdit(contact, { name, city });
+              setIsEditable(false);
             }}
-          >
-            <input type='text' value={name} onChange={(e) => setName(e.currentTarget.value)} />
-            <input type='text' value={city} onChange={(e) => setCity(e.currentTarget.value)} />
-            <button type='submit'>update</button>
-          </form>
-          <button onClick={() => setIsEditable(false)}>cancel</button>
+          />
+          <button onClick={() => setIsEditable(false)}>Cancel</button>
         </>
-      ) : null}
-      <button
-        onClick={() => {
-          setIsEditable(true);
-        }}
-      >
-        edit
-      </button>
-      <button
-        onClick={() => {
-          handleDelete(item);
-        }}
-      >
-        delete
-      </button>
-    </li>
+      ) : (
+        <>
+          {children}
+          <button onClick={() => setIsEditable(true)}>Edit</button>
+          <button onClick={() => handleDelete(contact)}>Delete</button>
+        </>
+      )}
+    </div>
   );
 };
 

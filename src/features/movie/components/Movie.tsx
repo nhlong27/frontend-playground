@@ -1,29 +1,26 @@
 import React from 'react';
-import useGetMovie from '../hooks/useGetMovie';
+import { useGetMovies } from '../hooks/useGetMovie';
 
 const Movie = () => {
   const [query, setQuery] = React.useState('');
-  const [inputValue, setInputValue] = React.useState('');
-  const { data, loading, error } = useGetMovie(query);
-  return (
-    <>
-      <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-      <button onClick={() => setQuery(inputValue)}>search</button>
-      {data ? (
-        <ul>
-          {data?.results?.map((movie: any, index: number) => (
-            <li key={index}>
-              <div>{movie.title}</div>
-              <img src={`https://api.themoviedb.org${movie.poster_path}`} alt='anything' />
-            </li>
-          ))}
-        </ul>
-      ) : error ? (
-        <div>error: {error?.message} </div>
-      ) : (
-        <div>loading</div>
-      )}
-    </>
+  const [value, setValue] = React.useState('');
+  const { data, error, isLoading } = useGetMovies(query);
+  return data ? (
+    <div>
+      <form onSubmit={(e)=>{
+        e.preventDefault();
+        setQuery(value)
+      }}>
+
+      <input type='text' value={value} onChange={(e) => setValue(e.currentTarget.value)} />
+      <button type='submit'>Search</button>
+      </form>
+      <pre>{JSON.stringify(data, null, '\t')}</pre>
+    </div>
+  ) : error ? (
+    <div>error</div>
+  ) : (
+    <div>loading</div>
   );
 };
 
