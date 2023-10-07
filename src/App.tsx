@@ -1,10 +1,10 @@
 import React from 'react';
-import LinkedListComponent from './features/LinkedListComponent';
+import Revision from './features/Revision';
 
 const App = () => {
   return (
     <React.Fragment>
-      <LinkedListComponent />
+      <Revision />
     </React.Fragment>
   );
 };
