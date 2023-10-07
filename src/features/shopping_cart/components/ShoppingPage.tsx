@@ -11,7 +11,7 @@ const ShoppingPage = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <div className='w-screen min-h-screen flex flex-col'>
-        <h1 className='w-full'>Shopping Page</h1>
+        <h1 className='w-full'>Coffee shop</h1>
         <div className='flex gap-8'>
           <Products />
           <Cart />

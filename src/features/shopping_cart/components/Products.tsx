@@ -2,7 +2,7 @@ import React from 'react';
 import { useGetProducts } from '../hooks/useGetProducts';
 
 const Products = () => {
-  const { data, isLoading, error } = useGetProducts();
+  const { data, error } = useGetProducts();
   return (
     <div className='basis-3/5'>
       <h1>Products</h1>
